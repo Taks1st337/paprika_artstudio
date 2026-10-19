@@ -680,17 +680,19 @@ img {
   color: var(--color-muted);
 }
 
+/* Три картки в ряд; на вужчих екранах остання переноситься й стає по центру */
 .masters {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 32px;
-  max-width: 980px;
-  margin: 0 auto;
 }
 
 .master {
   display: flex;
+  flex: 1 1 300px;
   flex-direction: column;
+  max-width: 460px;
   overflow: hidden;
   border: 1px solid var(--color-line);
   border-radius: var(--radius-lg);
@@ -916,6 +918,14 @@ img {
 .bio__class h5 {
   margin: 0 0 8px;
   font: 700 1.05rem var(--font-heading);
+}
+
+.bio__tags {
+  margin-bottom: 12px;
+}
+
+.bio__tags li {
+  background: #fff;
 }
 
 .bio__final {
@@ -1168,6 +1178,10 @@ select.form__input {
     transition-delay: 0.15s, 0.15s, 0s;
   }
 
+  .js .master.reveal:nth-child(3) {
+    transition-delay: 0.3s, 0.3s, 0s;
+  }
+
   .js .master.reveal .master__photo img {
     clip-path: inset(100% 0 0 0);
     transform: scale(1.15);
@@ -1177,6 +1191,10 @@ select.form__input {
 
   .js .master.reveal:nth-child(2) .master__photo img {
     transition-delay: 0.35s;
+  }
+
+  .js .master.reveal:nth-child(3) .master__photo img {
+    transition-delay: 0.5s;
   }
 
   .js .master.reveal.is-visible .master__photo img {
@@ -1346,8 +1364,8 @@ select.form__input {
   }
 
   .masters {
-    grid-template-columns: 1fr;
     max-width: 480px;
+    margin: 0 auto;
   }
 
   .master__body {
