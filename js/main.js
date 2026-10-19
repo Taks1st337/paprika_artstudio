@@ -9,6 +9,11 @@
  * 6. Історії майстрів
  * 7. Форма запису
  * 8. Поточний рік у підвалі
+ * 9. Фільтри каталогу майстер-класів
+ * 10. Кнопка «Поділитися»
+ * 11. Відео з YouTube — лише після натискання
+ * 12. Крапки під фото на телефоні
+ * 13. Нижня панель запису на телефоні
  */
 
 document.documentElement.classList.add('js');
@@ -63,7 +68,8 @@ function initHeaderShadow() {
    ========================================================================== */
 
 function initActiveNav() {
-  const links = document.querySelectorAll('.nav__link');
+  // Лише посилання на розділи цієї ж сторінки (#about тощо), без інших сторінок
+  const links = document.querySelectorAll('.nav__link[href^="#"]');
   if (!links.length || !('IntersectionObserver' in window)) return;
 
   const linkById = new Map(
@@ -120,15 +126,53 @@ function initLightbox() {
 
   const image = dialog.querySelector('img');
   const caption = dialog.querySelector('.lightbox__caption');
+  const prev = dialog.querySelector('.lightbox__nav--prev');
+  const next = dialog.querySelector('.lightbox__nav--next');
+  let items = [];
+  let current = 0;
+
+  // Фото однієї галереї гортаються стрілками; у групу входять і приховані
+  // фото (вони відкриваються кнопкою «+ ще N фото»)
+  const groupOf = (element) =>
+    [...(element.closest('[data-lightbox-group]') || document).querySelectorAll('[data-lightbox]')];
+
+  const show = (index) => {
+    current = (index + items.length) % items.length;
+    const button = items[current];
+    const preview = button.querySelector('img');
+    image.src = button.dataset.full || preview.src;
+    image.alt = preview.alt;
+    caption.textContent = items.length > 1
+      ? `${preview.alt} (${current + 1} з ${items.length})`
+      : preview.alt;
+  };
+
+  const open = (element, index) => {
+    items = groupOf(element);
+    if (!items.length) return;
+    [prev, next].forEach((button) => { if (button) button.hidden = items.length < 2; });
+    show(index);
+    dialog.showModal();
+  };
 
   document.querySelectorAll('[data-lightbox]').forEach((button) => {
-    button.addEventListener('click', () => {
-      const preview = button.querySelector('img');
-      image.src = preview.src;
-      image.alt = preview.alt;
-      caption.textContent = preview.alt;
-      dialog.showModal();
-    });
+    button.addEventListener('click', () => open(button, groupOf(button).indexOf(button)));
+  });
+
+  // Кнопки «+ ще N фото» і «Відкрити всі фото» відкривають галерею з потрібного фото
+  document.querySelectorAll('[data-lightbox-open]').forEach((button) => {
+    const group = document.querySelector('[data-lightbox-group]');
+    if (!group) return;
+    button.addEventListener('click', () => open(group, Number(button.dataset.lightboxOpen)));
+  });
+
+  prev?.addEventListener('click', () => show(current - 1));
+  next?.addEventListener('click', () => show(current + 1));
+
+  dialog.addEventListener('keydown', (event) => {
+    if (items.length < 2) return;
+    if (event.key === 'ArrowLeft') show(current - 1);
+    if (event.key === 'ArrowRight') show(current + 1);
   });
 
   // Закриття кліком по затемненому фону
@@ -159,6 +203,13 @@ function initBios() {
     dialog.addEventListener('click', (event) => {
       if (event.target === dialog) dialog.close();
     });
+
+    // «Читати історію» зі сторінки майстер-класу веде на index.html#bio-… —
+    // одразу відкриваємо потрібну історію
+    if (window.location.hash === `#${dialog.id}`) {
+      document.getElementById('team')?.scrollIntoView();
+      button.click();
+    }
   });
 }
 
@@ -182,6 +233,9 @@ function initBookingForm() {
   const success = document.getElementById('booking-success');
   const submitButton = form.querySelector('[type="submit"]');
 
+  // На сторінках майстер-класів у формі немає пошти — перевіряємо лише наявні поля
+  const fields = Object.keys(VALIDATORS).filter((field) => form.elements[field]);
+
   const showError = (field, message) => {
     const input = form.elements[field];
     const error = form.querySelector(`[data-error-for="${field}"]`);
@@ -196,7 +250,7 @@ function initBookingForm() {
   };
 
   // Повторна перевірка поля, щойно користувач виправляє помилку
-  Object.keys(VALIDATORS).forEach((field) => {
+  fields.forEach((field) => {
     form.elements[field].addEventListener('input', () => {
       if (form.elements[field].getAttribute('aria-invalid') === 'true') {
         validateField(field);
@@ -209,31 +263,30 @@ function initBookingForm() {
     event.target.value = event.target.value.replace(/[^\d\s()+-]/g, '');
   });
 
-  // Майстер-клас із картки одразу підставляється у форму
-  document.querySelectorAll('[data-class]').forEach((link) => {
-    link.addEventListener('click', () => {
-      form.elements.kind.value = link.dataset.class;
-    });
-  });
-
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     success.hidden = true;
 
-    const results = Object.keys(VALIDATORS).map(validateField);
+    const results = fields.map(validateField);
     if (results.includes(false)) {
       form.querySelector('[aria-invalid="true"]').focus();
       return;
     }
 
-    // TODO: підключити реальну відправку заявки (email-сервіс, Telegram-бот тощо).
-    // Поки що імітуємо коротку затримку відправлення.
+    // TODO: ТУТ ПІДКЛЮЧИТИ РЕАЛЬНУ ВІДПРАВКУ ЗАЯВКИ.
+    // Ця форма працює на головній і на всіх сторінках майстер-класів.
+    // Дані форми: new FormData(form) — name, phone, kind (майстер-клас),
+    // а також email (головна) або comment (сторінка майстер-класу).
+    // Замініть setTimeout нижче на fetch(...) до обраного сервісу
+    // (наприклад Formspree, Google Forms або Telegram-бот через свій сервер)
+    // і показуйте success лише після успішної відповіді.
+    // Поки що імітуємо коротку затримку відправлення — заявка нікуди не надходить.
     submitButton.disabled = true;
     submitButton.textContent = 'Надсилаємо…';
 
     setTimeout(() => {
       form.reset();
-      Object.keys(VALIDATORS).forEach((field) => showError(field, ''));
+      fields.forEach((field) => showError(field, ''));
       submitButton.disabled = false;
       submitButton.textContent = 'Надіслати заявку';
       success.hidden = false;
@@ -249,6 +302,169 @@ function initYear() {
   if (year) year.textContent = new Date().getFullYear();
 }
 
+/* 9. Фільтри каталогу майстер-класів
+   ========================================================================== */
+
+function initCatalogFilters() {
+  const group = document.querySelector('.filters');
+  if (!group) return;
+
+  const buttons = group.querySelectorAll('[data-filter]');
+  const items = document.querySelectorAll('.mc-grid--catalog > li');
+  const shownCount = document.querySelector('[data-shown-count]');
+  const ids = [...buttons].map((button) => button.dataset.filter);
+
+  const apply = (id) => {
+    buttons.forEach((button) => {
+      button.setAttribute('aria-pressed', String(button.dataset.filter === id));
+    });
+
+    let shown = 0;
+    items.forEach((item) => {
+      const visible = id === 'all' || item.dataset.category === id;
+      item.hidden = !visible;
+      if (visible) shown += 1;
+    });
+    shownCount.textContent = shown;
+
+    // Напрям зберігається в адресі: таким посиланням можна поділитися,
+    // а плитки на головній відкривають каталог одразу з фільтром
+    const url = new URL(window.location.href);
+    if (id === 'all') url.searchParams.delete('napriam');
+    else url.searchParams.set('napriam', id);
+    window.history.replaceState(null, '', url);
+  };
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => apply(button.dataset.filter));
+  });
+
+  const fromUrl = new URLSearchParams(window.location.search).get('napriam');
+  if (ids.includes(fromUrl)) {
+    apply(fromUrl);
+    // На телефоні прокручуємо рядок фільтрів так, щоб вибрана кнопка була видна
+    const button = group.querySelector(`[data-filter="${fromUrl}"]`).getBoundingClientRect();
+    const box = group.getBoundingClientRect();
+    group.scrollLeft += button.left - box.left - (box.width - button.width) / 2;
+  }
+}
+
+/* 10. Кнопка «Поділитися»
+   ========================================================================== */
+
+function showToast(message) {
+  const toast = document.querySelector('.toast');
+  if (!toast) return;
+  toast.textContent = message;
+  toast.classList.add('is-visible');
+  clearTimeout(showToast.timer);
+  showToast.timer = setTimeout(() => toast.classList.remove('is-visible'), 2500);
+}
+
+// Запасний спосіб скопіювати текст, коли navigator.clipboard недоступний
+// (наприклад, сторінку відкрито просто як файл з комп'ютера)
+function copyText(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    return navigator.clipboard.writeText(text);
+  }
+  const field = document.createElement('textarea');
+  field.value = text;
+  field.setAttribute('readonly', '');
+  field.style.position = 'fixed';
+  field.style.opacity = '0';
+  document.body.append(field);
+  field.select();
+  const ok = document.execCommand('copy');
+  field.remove();
+  return ok ? Promise.resolve() : Promise.reject(new Error('copy failed'));
+}
+
+function initShare() {
+  document.querySelectorAll('[data-share]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const data = {
+        title: document.title,
+        text: document.querySelector('meta[name="description"]')?.content || '',
+        url: window.location.href.split('#')[0],
+      };
+
+      // Системне меню «Поділитися» (телефони, частина браузерів)
+      if (navigator.share) {
+        try {
+          await navigator.share(data);
+          return;
+        } catch (error) {
+          if (error.name === 'AbortError') return; // людина просто закрила меню
+        }
+      }
+
+      try {
+        await copyText(data.url);
+        showToast('Посилання скопійовано');
+      } catch {
+        showToast('Не вдалося скопіювати — скопіюйте адресу з рядка браузера');
+      }
+    });
+  });
+}
+
+/* 11. Відео з YouTube — лише після натискання
+   ========================================================================== */
+
+// До натискання показуємо лише обкладинку: сторінка вантажиться швидше,
+// а YouTube нічого не знає про відвідувача, поки той не захоче дивитися
+function initVideos() {
+  document.querySelectorAll('[data-youtube]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const frame = document.createElement('iframe');
+      frame.src = `https://www.youtube-nocookie.com/embed/${button.dataset.youtube}?autoplay=1&rel=0`;
+      frame.title = button.dataset.title;
+      frame.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+
+      const wrapper = document.createElement('div');
+      wrapper.className = button.className;
+      wrapper.append(frame);
+      button.replaceWith(wrapper);
+      frame.focus();
+    });
+  });
+}
+
+/* 12. Крапки під фото на телефоні
+   ========================================================================== */
+
+function initSliderDots() {
+  document.querySelectorAll('.mc-slider').forEach((slider) => {
+    const track = slider.querySelector('.mc-slider__track');
+    const dots = slider.querySelectorAll('.mc-slider__dots span');
+    if (!track || dots.length < 2) return;
+
+    const update = () => {
+      const slide = track.firstElementChild;
+      const step = slide.offsetWidth + parseFloat(getComputedStyle(track).columnGap || 0);
+      const index = Math.min(dots.length - 1, Math.round(track.scrollLeft / step));
+      dots.forEach((dot, i) => dot.classList.toggle('is-active', i === index));
+    };
+
+    track.addEventListener('scroll', update, { passive: true });
+  });
+}
+
+/* 13. Нижня панель запису на телефоні
+   ========================================================================== */
+
+// Коли форма запису вже на екрані, панель ховається, щоб не закривати поля
+function initMobileBar() {
+  const bar = document.querySelector('.mobile-bar');
+  const booking = document.getElementById('book');
+  if (!bar || !booking || !('IntersectionObserver' in window)) return;
+
+  const observer = new IntersectionObserver(([entry]) => {
+    bar.classList.toggle('is-hidden', entry.isIntersecting);
+  });
+  observer.observe(booking);
+}
+
 /* Запуск
    ========================================================================== */
 
@@ -260,3 +476,8 @@ initLightbox();
 initBios();
 initBookingForm();
 initYear();
+initCatalogFilters();
+initShare();
+initVideos();
+initSliderDots();
+initMobileBar();

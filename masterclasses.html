@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Усі майстер-класи — Paprika Artstudio</title>
+  <meta name="description" content="18 майстер-класів для дітей: кулінарія, ремесла, малювання, декор і природа. Безкоштовно, вт–чт 16:00–18:00, Підгородне.">
+  <meta name="theme-color" content="#E8591A">
+
+  <!-- Open Graph (превʼю при поширенні в соцмережах) -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Усі майстер-класи — Paprika Artstudio">
+  <meta property="og:description" content="18 майстер-класів для дітей: кулінарія, ремесла, малювання, декор і природа. Безкоштовно, вт–чт 16:00–18:00, Підгородне.">
+  <meta property="og:locale" content="uk_UA">
+
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <link rel="apple-touch-icon" href="images/logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600;700&family=Nunito:wght@400;600;700&display=swap">
+
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <!-- Цю сторінку створює tools/build-masterclasses.js — не редагуйте її вручну -->
+  <a class="skip-link" href="#main">Перейти до змісту</a>
+
+  <!-- ===================== Шапка ===================== -->
+  <header class="header">
+    <div class="container header__inner">
+      <a class="logo" href="index.html">
+        <img src="images/logo.png" alt="" width="46" height="46">
+        <span>Paprika Artstudio</span>
+      </a>
+
+      <nav class="nav" id="site-nav" aria-label="Розділи">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="index.html#about">Про нас</a></li>
+          <li><a class="nav__link is-active" href="masterclasses.html" aria-current="page">Майстер-класи</a></li>
+          <li><a class="nav__link" href="index.html#gallery">Галерея</a></li>
+          <li><a class="nav__link" href="index.html#team">Майстри</a></li>
+          <li><a class="nav__link" href="index.html#book">Запис</a></li>
+        </ul>
+        <a class="btn nav__cta-mobile" href="index.html#book">Записатися</a>
+      </nav>
+
+      <a class="btn btn--small header__cta" href="index.html#book">Записатися</a>
+
+      <button class="burger" type="button" aria-controls="site-nav" aria-expanded="false" aria-label="Відкрити меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ===================== Вступ ===================== -->
+    <div class="page-hero">
+      <div class="container page-hero__inner">
+        <div>
+          <nav class="breadcrumbs" aria-label="Ви тут">
+            <ol>
+              <li><a href="index.html">Головна</a></li>
+              <li><span aria-current="page">Майстер-класи</span></li>
+            </ol>
+          </nav>
+          <h1>Усі майстер-класи <span>«Паприки»</span></h1>
+          <p class="page-hero__lead">18 занять, на яких діти готують, ліплять, плетуть, малюють і вирощують. Кожен працює у своєму темпі й забирає додому роботу, якою можна пишатися.</p>
+          <ul class="badges">
+            <li>Безкоштовно</li>
+            <li>Вт, ср, чт · 16:00–18:00</li>
+            <li>Для дітей з будь-якими можливостями</li>
+          </ul>
+        </div>
+
+        <div class="collage" aria-hidden="true">
+          <img src="images/masterclasses/smachna-kondyterka/thumbs/1.jpg" alt="" width="450" height="600">
+          <img src="images/masterclasses/keramichna-mozaika/thumbs/1.jpg" alt="" width="450" height="600">
+          <img src="images/masterclasses/solomopletinnia/thumbs/1.jpg" alt="" width="450" height="600">
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== Каталог ===================== -->
+    <section class="section catalog" aria-labelledby="catalog-title">
+      <div class="container">
+        <h2 class="visually-hidden" id="catalog-title">Список майстер-класів</h2>
+
+        <!-- Фільтри працюють через js/main.js; без JavaScript їх сховано й видно всі картки -->
+        <div class="filters" role="group" aria-label="Напрями майстер-класів">
+          <button class="filter" type="button" data-filter="all" aria-pressed="true">
+            Усі <span class="filter__count">18</span>
+          </button>
+          <button class="filter cat-cook" type="button" data-filter="cook" aria-pressed="false">
+            Кулінарія <span class="filter__count">2</span>
+          </button>
+          <button class="filter cat-craft" type="button" data-filter="craft" aria-pressed="false">
+            Ремесла <span class="filter__count">6</span>
+          </button>
+          <button class="filter cat-paint" type="button" data-filter="paint" aria-pressed="false">
+            Малювання <span class="filter__count">5</span>
+          </button>
+          <button class="filter cat-decor" type="button" data-filter="decor" aria-pressed="false">
+            Декор і подарунки <span class="filter__count">3</span>
+          </button>
+          <button class="filter cat-nature" type="button" data-filter="nature" aria-pressed="false">
+            Природа <span class="filter__count">2</span>
+          </button>
+        </div>
+        <p class="catalog__status" role="status">Показано: <b data-shown-count>18</b> · натисніть на картку, щоб побачити фото, відео й опис</p>
+
+        <ul class="mc-grid mc-grid--catalog">
+          <li data-category="cook">
+            <article class="mc-card cat-cook reveal">
+              <div class="mc-card__media">
+                <img src="images/masterclasses/smachna-kondyterka/thumbs/1.jpg" alt="" width="450" height="600" loading="lazy">
+              </div>
+              <div class="mc-card__body">
+                <span class="tag">Кулінарія</span>
+                <h3 class="mc-card__title"><a class="mc-card__link" href="masterclasses/smachna-kondyterka.html">Смачна кондитерка</a></h3>
+                <p class="mc-card__text">Від ароматної випічки до вишуканих десертів: замішуємо тісто й красиво подаємо солодощі.</p>
+                <div class="mc-card__footer">
+                  <p class="mc-card__result"><b>Додому:</b> власний десерт</p>
+                  <span class="mc-card__more" aria-hidden="true">Детальніше →</span>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li data-category="cook">
+            <article class="mc-card cat-cook reveal">
+              <div class="mc-card__media">
+                <img src="images/masterclasses/kukhni-krain-svitu/thumbs/1.jpg" alt="" width="600" height="493" loading="lazy">
+              </div>
+              <div class="mc-card__body">
+                <span class="tag">Кулінарія</span>
+                <h3 class="mc-card__title"><a class="mc-card__link" href="masterclasses/kukhni-krain-svitu.html">Кухні країн світу</a></h3>
+                <p class="mc-card__text">Мандруємо світом через смаки й готуємо популярні страви різних країн.</p>
+                <div class="mc-card__footer">
+                  <p class="mc-card__result"><b>Додому:</b> приготована страва</p>
+                  <span class="mc-card__more" aria-hidden="true">Детальніше →</span>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li data-category="craft">
+            <article class="mc-card cat-craft reveal">
+              <div class="mc-card__media">
+                <img src="images/masterclasses/keramichna-mozaika/thumbs/1.jpg" alt="" width="450" height="600" loading="lazy">
+              </div>
+              <div class="mc-card__body">
+                <span class="tag">Ремесла</span>
+                <h3 class="mc-card__title"><a class="mc-card__link" href="masterclasses/keramichna-mozaika.html">Керамічна мозаїка</a></h3>
+                <p class="mc-card__text">Яскраві картини й декор із маленьких керамічних фрагментів.</p>
+                <div class="mc-card__footer">
+                  <p class="mc-card__result"><b>Додому:</b> мозаїчна картина</p>
+                  <span class="mc-card__more" aria-hidden="true">Детальніше →</span>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li data-category="craft">
+            <article class="mc-card cat-craft reveal">
+              <div class="mc-card__media">
+                <img src="images/masterclasses/solomopletinnia/thumbs/1.jpg" alt="" width="450" height="600" loading="lazy">
+              </div>
+              <div class="mc-card__body">
+                <span class="tag">Ремесла</span>
+                <h3 class="mc-card__title"><a class="mc-card__link" href="masterclasses/solomopletinnia.html">Соломоплетіння</a></h3>
+                <p class="mc-card__text">Пташки, янголи й прикраси із золотої соломи та українські традиції.</p>
+                <div class="mc-card__footer">
+                  <p class="mc-card__result"><b>Додому:</b> солом'яний янгол</p>
+                  <span class="mc-card__more" aria-hidden="true">Детальніше →</span>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li data-category="craft">
+            <article class="mc-card cat-craft reveal">
+              <div class="mc-card__media">
+                <img src="images/masterclasses/derevoobrobka/thumbs/1.jpg" alt="" width="400" height="600" loading="lazy">
+              </div>
+              <div class="mc-card__body">
+                <span class="tag">Ремесла</span>
+                <h3 class="mc-card__title"><a class="mc-card__link" href="masterclasses/derevoobrobka.html">Деревообробка</a></h3>
+                <p class="mc-card__text">Від заготовки до власного виробу: пиляємо, шліфуємо й оздоблюємо дерево.</p>
+                <div class="mc-card__footer">
+                  <p class="mc-card__result"><b>Додому:</b> виріб із дерева</p>
+                  <span class="mc-card__more" aria-hidden="true">Детальніше →</span>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li data-category="craft">
+            <article class="mc-card cat-craft reveal">
+              <div class="mc-card__media">
+                <img src="images/masterclasses/liplennia-z-hlyny/thumbs/1.jpg" alt="" width="450" height="600" loading="lazy">
+              </div>
+              <div class="mc-card__body">
+                <span class="tag">Ремесла</span>
+                <h3 class="mc-card__title"><a class="mc-card__link" href="masterclasses/liplennia-z-hlyny.html">Ліплення з глини</a></h3>
+                <p class="mc-card__text">Фігурки, посуд і декор, що оживають у дитячих долонях.</p>
+                <div class="mc-card__footer">
+                  <p class="mc-card__result"><b>Додому:</b> фігурка або посуд</p>
+                  <span class="mc-card__more" aria-hidden="true">Детальніше →</span>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li data-category="craft">
+            <article class="mc-card cat-craft reveal">
+              <div class="mc-card__media">
+                <img src="images/masterclasses/viazannia-na-mashynakh/thumbs/1.jpg" alt="" width="450" height="600" loading="lazy">
+              </div>
+              <div class="mc-card__body">
+                <span class="tag">Ремесла</span>
+                <h3 class="mc-card__title"><a class="mc-card__link" href="masterclasses/viazannia-na-mashynakh.html">В'язання на в'язальних машинах</a></h3>
+                <p class="mc-card__text">Усього за одне заняття нитки перетворюються на справжню шапочку.</p>
+                <div class="mc-card__footer">
+                  <p class="mc-card__result"><b>Додому:</b> власна шапочка</p>
+                  <span class="mc-card__more" aria-hidden="true">Детальніше →</span>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li data-category="craft">
+            <article class="mc-card cat-craft reveal">
+              <div class="mc-card__media">
+                <img src="images/masterclasses/hipsovyi-dekor/thumbs/1.jpg" alt="" width="450" height="600" loading="lazy">
+              </div>
+              <div class="mc-card__body">
+                <span class="tag">Ремесла</span>
+                <h3 class="mc-card__title"><a class="mc-card__link" href="masterclasses/hipsovyi-dekor.html">Гіпсовий декор</a></h3>
+                <p class="mc-card__text">Декоративні вироби з гіпсу: форми, текстури й оздоблення.</p>
+                <div class="mc-card__footer">
+                  <p class="mc-card__result"><b>Додому:</b> гіпсовий виріб</p>
+                  <span class="mc-card__more" aria-hidden="true">Детальніше →</span>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li data-category="paint">
+            <article class="mc-card cat-paint reveal">
+              <div class="mc-card__media">
+                <img src="images/masterclasses/ebru/thumbs/1.jpg" alt="" width="600" height="586" loading="lazy">
+              </div>
+              <div class="mc-card__body">
+                <span class="tag">Малювання</span>
+                <h3 class="mc-card__title"><a class="mc-card__link" href="masterclasses/ebru.html">Ебру — живопис на воді</a></h3>
+                <p class="mc-card__text">Чарівні візерунки фарбами просто на воді, перенесені на папір.</p>
+                <div class="mc-card__footer">
+                  <p class="mc-card__result"><b>Додому:</b> малюнок ебру</p>
+                  <span class="mc-card__more" aria-hidden="true">Детальніше →</span>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li data-category="paint">
+            <article class="mc-card cat-paint reveal">
+              <div class="mc-card__media">
+                <img src="images/masterclasses/zhyvopys-kavoiu/thumbs/1.jpg" alt="" width="451" height="600" loading="lazy">
+              </div>
+              <div class="mc-card__body">
+                <span class="tag">Малювання</span>
+                <h3 class="mc-card__title"><a class="mc-card__link" href="masterclasses/zhyvopys-kavoiu.html">Живопис кавою</a></h3>
+                <p class="mc-card__text">Малюємо ароматною кавою й шукаємо відтінки замість звичних фарб.</p>
+                <div class="mc-card__footer">
+                  <p class="mc-card__result"><b>Додому:</b> картина кавою</p>
+                  <span class="mc-card__more" aria-hidden="true">Детальніше →</span>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li data-category="paint">
+            <article class="mc-card cat-paint reveal">
+              <div class="mc-card__media">
+                <img src="images/masterclasses/avtorski-shtampy/thumbs/1.jpg" alt="" width="450" height="600" loading="lazy">
+              </div>
+              <div class="mc-card__body">
+                <span class="tag">Малювання</span>
+                <h3 class="mc-card__title"><a class="mc-card__link" href="masterclasses/avtorski-shtampy.html">Авторські штампи</a></h3>
+                <p class="mc-card__text">Придумуємо власні малюнки й перетворюємо їх на унікальні відбитки.</p>
+                <div class="mc-card__footer">
+                  <p class="mc-card__result"><b>Додому:</b> власні відбитки</p>
+                  <span class="mc-card__more" aria-hidden="true">Детальніше →</span>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li data-category="paint">
+            <article class="mc-card cat-paint reveal">
+              <div class="mc-card__media">
+                <div class="photo-ph">
+                  <span class="photo-ph__tiles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+                  <span class="photo-ph__text">Тут буде фото з заняття</span>
+                </div>
+              </div>
+              <div class="mc-card__body">
+                <span class="tag">Малювання</span>
+                <h3 class="mc-card__title"><a class="mc-card__link" href="masterclasses/vitrazhnyi-rozpys.html">Вітражний розпис</a></h3>
+                <p class="mc-card__text">Композиції, що грають кольорами на світлі.</p>
+                <div class="mc-card__footer">
+                  <p class="mc-card__result"><b>Додому:</b> вітражна композиція</p>
+                  <span class="mc-card__more" aria-hidden="true">Детальніше →</span>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li data-category="paint">
+            <article class="mc-card cat-paint reveal">
+              <div class="mc-card__media">
+                <div class="photo-ph">
+                  <span class="photo-ph__tiles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+                  <span class="photo-ph__text">Тут буде фото з заняття</span>
+                </div>
+              </div>
+              <div class="mc-card__body">
+                <span class="tag">Малювання</span>
+                <h3 class="mc-card__title"><a class="mc-card__link" href="masterclasses/pastel.html">Малювання пастеллю</a></h3>
+                <p class="mc-card__text">Ніжні кольори, м'які переходи, пейзажі та фантазійні сюжети.</p>
+                <div class="mc-card__footer">
+                  <p class="mc-card__result"><b>Додому:</b> картина пастеллю</p>
+                  <span class="mc-card__more" aria-hidden="true">Детальніше →</span>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li data-category="decor">
+            <article class="mc-card cat-decor reveal">
+              <div class="mc-card__media">
+                <img src="images/masterclasses/pletinnia-z-nytok/thumbs/1.jpg" alt="" width="450" height="600" loading="lazy">
+              </div>
+              <div class="mc-card__body">
+                <span class="tag">Декор і подарунки</span>
+                <h3 class="mc-card__title"><a class="mc-card__link" href="masterclasses/pletinnia-z-nytok.html">Плетіння з ниток і створення брелоків</a></h3>
+                <p class="mc-card__text">Стильні прикраси, листочки й брелоки — подарунки для себе й близьких.</p>
+                <div class="mc-card__footer">
+                  <p class="mc-card__result"><b>Додому:</b> брелок</p>
+                  <span class="mc-card__more" aria-hidden="true">Детальніше →</span>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li data-category="decor">
+            <article class="mc-card cat-decor reveal">
+              <div class="mc-card__media">
+                <div class="photo-ph">
+                  <span class="photo-ph__tiles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+                  <span class="photo-ph__text">Тут буде фото з заняття</span>
+                </div>
+              </div>
+              <div class="mc-card__body">
+                <span class="tag">Декор і подарунки</span>
+                <h3 class="mc-card__title"><a class="mc-card__link" href="masterclasses/antystres-skvishi.html">Антистрес-сквіші</a></h3>
+                <p class="mc-card__text">Створюємо яскраві м'якенькі антистрес-іграшки.</p>
+                <div class="mc-card__footer">
+                  <p class="mc-card__result"><b>Додому:</b> власний сквіш</p>
+                  <span class="mc-card__more" aria-hidden="true">Детальніше →</span>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li data-category="decor">
+            <article class="mc-card cat-decor reveal">
+              <div class="mc-card__media">
+                <div class="photo-ph">
+                  <span class="photo-ph__tiles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span>
+                  <span class="photo-ph__text">Тут буде фото з заняття</span>
+                </div>
+              </div>
+              <div class="mc-card__body">
+                <span class="tag">Декор і подарунки</span>
+                <h3 class="mc-card__title"><a class="mc-card__link" href="masterclasses/dekoruvannia-shoperiv.html">Декорування шоперів</a></h3>
+                <p class="mc-card__text">Звичайна тканинна сумка стає авторським аксесуаром.</p>
+                <div class="mc-card__footer">
+                  <p class="mc-card__result"><b>Додому:</b> авторський шопер</p>
+                  <span class="mc-card__more" aria-hidden="true">Детальніше →</span>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li data-category="nature">
+            <article class="mc-card cat-nature reveal">
+              <div class="mc-card__media">
+                <img src="images/masterclasses/mikrohrin/thumbs/1.jpg" alt="" width="338" height="600" loading="lazy">
+              </div>
+              <div class="mc-card__body">
+                <span class="tag">Природа</span>
+                <h3 class="mc-card__title"><a class="mc-card__link" href="masterclasses/mikrohrin.html">Вирощуємо мікрогрін разом!</a></h3>
+                <p class="mc-card__text">Висаджуємо насіння, доглядаємо — і за 10 днів маємо свіжий мікрогрін.</p>
+                <div class="mc-card__footer">
+                  <p class="mc-card__result"><b>Додому:</b> власний мікрогрін</p>
+                  <span class="mc-card__more" aria-hidden="true">Детальніше →</span>
+                </div>
+              </div>
+            </article>
+          </li>
+          <li data-category="nature">
+            <article class="mc-card cat-nature reveal">
+              <div class="mc-card__media">
+                <img src="images/masterclasses/kompozytsii-iz-sukhotsvitiv/thumbs/1.jpg" alt="" width="338" height="600" loading="lazy">
+              </div>
+              <div class="mc-card__body">
+                <span class="tag">Природа</span>
+                <h3 class="mc-card__title"><a class="mc-card__link" href="masterclasses/kompozytsii-iz-sukhotsvitiv.html">Композиції із сухоцвітів</a></h3>
+                <p class="mc-card__text">Декоративні композиції із сухих квітів і природних матеріалів.</p>
+                <div class="mc-card__footer">
+                  <p class="mc-card__result"><b>Додому:</b> композиція із сухоцвітів</p>
+                  <span class="mc-card__more" aria-hidden="true">Детальніше →</span>
+                </div>
+              </div>
+            </article>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===================== Як проходить заняття ===================== -->
+    <section class="section section--alt" aria-labelledby="steps-title">
+      <div class="container">
+        <span class="section__eyebrow">Для батьків</span>
+        <h2 id="steps-title">Як проходить заняття</h2>
+        <ol class="steps">
+          <li class="step cat-cook">
+            <span class="step__num" aria-hidden="true">1</span>
+            <b class="step__title">Записуєтеся</b>
+            <span class="step__text">Через форму на сайті або телефоном. Ми передзвонимо й підтвердимо час.</span>
+          </li>
+          <li class="step cat-paint">
+            <span class="step__num" aria-hidden="true">2</span>
+            <b class="step__title">Приходите</b>
+            <span class="step__text">Вт, ср або чт о 16:00 у Підгородному, вул. Шосейна, 90Б. Усі матеріали чекають на місці.</span>
+          </li>
+          <li class="step cat-nature">
+            <span class="step__num" aria-hidden="true">3</span>
+            <b class="step__title">Творимо разом</b>
+            <span class="step__text">Кожна дитина працює у своєму темпі, а майстриня допомагає саме тоді, коли це потрібно.</span>
+          </li>
+          <li class="step cat-decor">
+            <span class="step__num" aria-hidden="true">4</span>
+            <b class="step__title">Забираєте додому</b>
+            <span class="step__text">Готову роботу чи смаколик — і привід для гордості на весь вечір.</span>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===================== Не знаєте, що обрати? ===================== -->
+    <section class="section" aria-labelledby="help-title">
+      <div class="container">
+        <div class="help-box">
+          <div class="help-box__text">
+            <h2 id="help-title">Не знаєте, що обрати?</h2>
+            <p>Зателефонуйте нам, і ми разом підберемо майстер-клас, який підійде саме вашій дитині: за віком, інтересами та можливостями.</p>
+          </div>
+          <div class="help-box__actions">
+            <a class="btn btn--ghost" href="tel:+380671717288"><span class="visually-hidden">Подзвонити:</span> 067 171 72 88</a>
+            <a class="btn" href="index.html#book">Записатися</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== Підвал ===================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__about">
+          <a class="logo" href="index.html">
+            <img src="images/logo.png" alt="" width="46" height="46" loading="lazy">
+            <span>Paprika Artstudio</span>
+          </a>
+          <p>Разом робимо світ яскравішим! ❤️</p>
+        </div>
+
+        <div>
+          <h2 class="footer__title">Контакти</h2>
+          <ul class="footer__list">
+            <li><a href="tel:+380671717288">067 171 72 88</a></li>
+            <li><a href="tel:+380938850040">093 885 00 40</a></li>
+            <li><a href="https://instagram.com/paprika_artstudio" target="_blank" rel="noopener">@paprika_artstudio</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="footer__title">Адреса</h2>
+          <ul class="footer__list">
+            <li>Підгородне, вул. Шосейна, 90Б</li>
+            <li>Вт, ср, чт · 16:00–18:00</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        © <span id="year">2026</span> Paprika Artstudio
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
