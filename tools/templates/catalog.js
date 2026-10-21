@@ -85,7 +85,7 @@ ${STEPS.map((step, i) => `          <li class="step cat-${step.cat}">
             <p>Зателефонуйте нам, і ми разом підберемо майстер-клас, який підійде саме вашій дитині: за віком, інтересами та можливостями.</p>
           </div>
           <div class="help-box__actions">
-            <a class="btn btn--ghost" href="tel:+380671717288"><span class="visually-hidden">Подзвонити:</span> 067 171 72 88</a>
+            <a class="btn btn--ghost" href="tel:+380671717288"><span class="visually-hidden">Подзвонити:</span> +380 67 171 72 88</a>
             <a class="btn" href="index.html#book">Записатися</a>
           </div>
         </div>

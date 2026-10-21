@@ -205,7 +205,7 @@ function booking(site, mc) {
       <span class="section__eyebrow">Запис</span>
       <h2 id="book-title">Записатися на майстер-клас «${esc(mc.title)}»</h2>
       <p>Залиште телефон, і ми передзвонимо, щоб підтвердити участь. Якщо дитині потрібна особлива підтримка — просто напишіть про це в коментарі.</p>
-      <p><b>Телефон:</b> <a href="tel:+380671717288">067 171 72 88</a>, <a href="tel:+380938850040">093 885 00 40</a></p>
+      <p><b>Телефон:</b> <a href="tel:+380671717288">+380 67 171 72 88</a>, <a href="tel:+380938850040">+380 93 885 00 40</a></p>
     </div>
 
     <form class="form" id="booking-form" novalidate>
@@ -277,7 +277,7 @@ ${indent(cards.join('\n'), 6)}
 
 const MOBILE_BAR = `  <!-- Панель запису внизу екрана (лише на телефоні) -->
   <div class="mobile-bar">
-    <a class="mobile-bar__call" href="tel:+380671717288" aria-label="Подзвонити: 067 171 72 88">${ICONS.phone}</a>
+    <a class="mobile-bar__call" href="tel:+380671717288" aria-label="Подзвонити: +380 67 171 72 88">${ICONS.phone}</a>
     <a class="cta cta--auto-shine mobile-bar__cta" href="#book">
       Записатися безкоштовно
       <span class="cta__icon">${ICONS.calendar.replace('width="20" height="20"', 'width="19" height="19"')}</span>

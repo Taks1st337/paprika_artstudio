@@ -109,9 +109,19 @@ function footer(base) {
         <div>
           <h2 class="footer__title">Контакти</h2>
           <ul class="footer__list">
-            <li><a href="tel:+380671717288">067 171 72 88</a></li>
-            <li><a href="tel:+380938850040">093 885 00 40</a></li>
-            <li><a href="https://instagram.com/paprika_artstudio" target="_blank" rel="noopener">@paprika_artstudio</a></li>
+            <li><a href="tel:+380671717288">+380 67 171 72 88</a></li>
+            <li><a href="tel:+380938850040">+380 93 885 00 40</a></li>
+            <li class="footer__social">
+              <a class="footer__social-link" href="https://instagram.com/paprika_artstudio" target="_blank" rel="noopener" aria-label="Instagram Paprika Artstudio">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"/></svg>
+                Instagram
+              </a>
+              <a class="footer__social-link" href="https://www.tiktok.com/@paprika_artstudio" target="_blank" rel="noopener" aria-label="TikTok Paprika Artstudio">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.54 3h-3.09v12.4a2.59 2.59 0 0 1-2.59 2.5 2.6 2.6 0 0 1-2.6-2.6 2.6 2.6 0 0 1 3.36-2.49V9.66a5.73 5.73 0 0 0-.76-.05A5.69 5.69 0 0 0 4.17 15.3 5.69 5.69 0 0 0 9.86 21a5.69 5.69 0 0 0 5.69-5.69V9.01a7.34 7.34 0 0 0 4.29 1.38V7.3a4.28 4.28 0 0 1-3.24-1.48z"/></svg>
+                TikTok
+              </a>
+            </li>
+
           </ul>
         </div>
 

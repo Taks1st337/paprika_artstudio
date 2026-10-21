@@ -2187,6 +2187,38 @@ select.form__input {
   list-style: none;
 }
 
+.footer a[href^="tel:"] {
+  white-space: nowrap;
+}
+
+.footer__social {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.footer .footer__social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--radius-pill);
+  color: #fff;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+
+.footer .footer__social-link:hover,
+.footer .footer__social-link:focus-visible {
+  border-color: var(--color-orange-light);
+  background: rgba(232, 89, 26, 0.16);
+  color: var(--color-orange-light);
+}
+
 .footer__bottom {
   margin-top: 36px;
   padding-top: 20px;
