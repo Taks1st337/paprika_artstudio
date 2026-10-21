@@ -4,7 +4,6 @@
  */
 
 const { esc, countClasses, indent, ICONS } = require('../lib/html');
-const { masterclassCard } = require('./parts');
 
 function directionTile(category) {
   return `<li>
@@ -21,7 +20,6 @@ function directionTile(category) {
 
 function homeBlock({ categories, masterclasses }) {
   const total = masterclasses.length;
-  const featured = masterclasses.filter((mc) => mc.featured);
 
   return `<div class="classes-head">
   <div class="classes-head__text">
@@ -37,15 +35,6 @@ function homeBlock({ categories, masterclasses }) {
 
 <ul class="directions">
 ${indent(categories.map(directionTile).join('\n'), 2)}
-</ul>
-
-<div class="subhead">
-  <h3>Улюблені майстер-класи дітей</h3>
-  <a class="link-more" href="masterclasses.html">Дивитися всі ${total} →</a>
-</div>
-
-<ul class="mc-grid">
-${indent(featured.map((mc) => `<li>\n${indent(masterclassCard(mc, { heading: 'h4' }), 2)}\n</li>`).join('\n'), 2)}
 </ul>`;
 }
 

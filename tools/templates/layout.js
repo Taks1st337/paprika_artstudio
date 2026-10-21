@@ -77,7 +77,6 @@ function header(base, bookHref) {
         <ul class="nav__list">
           <li><a class="nav__link" href="${home}#about">Про нас</a></li>
           <li><a class="nav__link is-active" href="${base}masterclasses.html" aria-current="page">Майстер-класи</a></li>
-          <li><a class="nav__link" href="${home}#gallery">Галерея</a></li>
           <li><a class="nav__link" href="${home}#team">Майстри</a></li>
           <li><a class="nav__link" href="${home}#book">Запис</a></li>
         </ul>

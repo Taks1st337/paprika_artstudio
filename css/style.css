@@ -1615,33 +1615,6 @@ img {
 /* 9. Галерея та лайтбокс
    ========================================================================== */
 
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-}
-
-.gallery__item {
-  position: relative;
-  overflow: hidden;
-  padding: 0;
-  border: 0;
-  border-radius: var(--radius-md);
-  background: var(--color-line);
-  cursor: zoom-in;
-}
-
-.gallery__item img {
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.gallery__item:hover img {
-  transform: scale(1.05);
-}
-
 .lightbox {
   /* Фото галереї мають до 1200px, тож лайтбокс може бути великим */
   max-width: min(92vw, 960px);
@@ -2514,10 +2487,6 @@ select.form__input {
     margin-top: 12px;
   }
 
-  .gallery {
-    grid-template-columns: 1fr 1fr;
-  }
-
   /* Плитки напрямів — по дві в ряд, щоб не займати кілька екранів */
   .directions {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -2833,14 +2802,6 @@ select.form__input {
 
   .toast {
     bottom: calc(96px + env(safe-area-inset-bottom, 0px));
-  }
-
-  .gallery__item:last-child {
-    grid-column: 1 / -1;
-  }
-
-  .gallery__item:last-child img {
-    aspect-ratio: 2 / 1;
   }
 
   .masters {
